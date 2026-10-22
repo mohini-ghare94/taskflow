@@ -1,0 +1,8 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "description": "Task management web app - Node.js, Express, CRUD, XML export/import",
+  "main": "index.js",
+  "scripts": { "start": "node index.js" },
+  "dependencies": { "express": "^4.19.2" }
+}

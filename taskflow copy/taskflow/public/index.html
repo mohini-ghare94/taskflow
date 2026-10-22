@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow - Task Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== LOGIN / REGISTER ========== -->
+  <section id="auth" class="auth">
+    <div class="auth-card">
+      <div class="brand"><span class="logo">✓</span> TaskFlow</div>
+      <p class="muted" id="authSub">Sign in to manage your tasks</p>
+      <form id="authForm" novalidate>
+        <label>Username<input id="username" type="text" autocomplete="username" placeholder="e.g. rahul"></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" placeholder="Min 6 characters"></label>
+        <p id="authError" class="error" role="alert"></p>
+        <button class="btn primary full" id="authBtn" type="submit">Sign in</button>
+      </form>
+      <p class="muted center"><span id="authToggleText">New here?</span>
+        <a href="#" id="authToggle">Create an account</a></p>
+    </div>
+  </section>
+
+  <!-- ========== MAIN APP ========== -->
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="brand"><span class="logo">✓</span> TaskFlow</div>
+      <div class="user">
+        <span id="welcome" class="muted"></span>
+        <button class="btn ghost" id="themeBtn">🌙 Dark</button>
+        <button class="btn ghost" id="logoutBtn">Log out</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="stats">
+        <div class="stat"><span class="num" id="statTotal">0</span><span>Total</span></div>
+        <div class="stat"><span class="num amber" id="statPending">0</span><span>Pending</span></div>
+        <div class="stat"><span class="num green" id="statDone">0</span><span>Completed</span></div>
+        <div class="stat"><span class="num red" id="statOverdue">0</span><span>Overdue</span></div>
+      </section>
+
+      <section class="toolbar">
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-filter="all">All</button>
+          <button class="tab" data-filter="pending">Pending</button>
+          <button class="tab" data-filter="completed">Completed</button>
+        </div>
+        <input id="search" class="search" type="search" placeholder="Search tasks...">
+        <select id="catFilter" class="catfilter">
+          <option value="all">All categories</option>
+          <option>General</option><option>Study</option><option>Personal</option><option>Work</option><option>Project</option>
+        </select>
+        <div class="actions">
+          <button class="btn ghost" id="exportBtn">Export XML</button>
+          <button class="btn ghost" id="importBtn">Import XML</button>
+          <input type="file" id="importFile" accept=".xml,application/xml,text/xml" hidden>
+          <button class="btn primary" id="addBtn">+ New task</button>
+        </div>
+      </section>
+
+      <section id="list" class="list"></section>
+      <p id="empty" class="empty hidden">No tasks here yet. Click “New task” to add one.</p>
+    </main>
+  </div>
+
+  <!-- ========== ADD / EDIT MODAL ========== -->
+  <div id="modal" class="modal hidden">
+    <form id="taskForm" class="modal-card" novalidate>
+      <h2 id="modalTitle">New task</h2>
+      <label>Title<input id="fTitle" type="text" maxlength="100" placeholder="What needs to be done?"></label>
+      <label>Description<textarea id="fDesc" rows="3" placeholder="Optional details"></textarea></label>
+      <div class="row">
+        <label>Priority
+          <select id="fPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <label>Category
+          <select id="fCategory">
+            <option>General</option><option>Study</option><option>Personal</option><option>Work</option><option>Project</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Due date<input id="fDue" type="date"></label>
+        <label>Due time<input id="fTime" type="time"></label>
+      </div>
+      <p id="formError" class="error" role="alert"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+        <button type="submit" class="btn primary">Save task</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
